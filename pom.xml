@@ -122,6 +122,9 @@
                         <version>1.18.38</version>
                     </path>
                 </annotationProcessorPaths>
+               <compilerArgs>
+                  <arg>-Xlint</arg>
+               </compilerArgs>
             </configuration>
         </plugin>
 
