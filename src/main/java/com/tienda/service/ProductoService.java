@@ -63,6 +63,21 @@ public class ProductoService {
         } catch (DataIntegrityViolationException e) {
             // Lanza una nueva excepción para encapsular el problema de integridad de datos
             throw new IllegalStateException("No se puede eliminar el producto. Tiene datos asociados.", e);
-        }
+        }   
+    }
+    
+    @Transactional(readOnly = true)
+        public List<Producto> consultaDerivada(Double precioInf, Double precioSup) {
+        return productoRepository.findByPrecioBetweenOrderByPrecioAsc(precioInf, precioSup);
+    }
+        
+    @Transactional(readOnly = true)
+        public List<Producto> consultaJPQL(Double precioInf, Double precioSup) {
+        return productoRepository.consultaJPQL(precioInf, precioSup);
+    }
+        
+    @Transactional(readOnly = true)
+        public List<Producto> consultaSQL(Double precioInf, Double precioSup) {
+        return productoRepository.consultaSQL(precioInf, precioSup);
     }
 }

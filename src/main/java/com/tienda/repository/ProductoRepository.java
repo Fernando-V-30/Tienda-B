@@ -14,10 +14,13 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     public List<Producto> findByActivoTrue();
     
+    
     public List<Producto> findByPrecioBetweenOrderByPrecioAsc(double precioInf, double precioSup);
     
-    public List<Producto> consultaJPQL(@Param("precioinf") double precioinf,@Param("precioSup") double precioSup);
+    @Query(value = "SELECT p FROM Producto p WHERE p.precio BETWEEN :precioInf AND :precioSup ORDER BY p. precio ASC")
+    public List<Producto> consultaJPQL(@Param("precioInf") double precioinf,@Param("precioSup") double precioSup);
     
-    
-    
-}
+    @Query(nativeQuery = true,
+            value = "SELECT p FROM Producto p WHERE p.precio BETWEEN :precioInf AND :precioSup ORDER BY p. precio ASC")
+    public List<Producto> consultaSQL(@Param("precioInf") double precioinf,@Param("precioSup") double precioSup);
+    }
