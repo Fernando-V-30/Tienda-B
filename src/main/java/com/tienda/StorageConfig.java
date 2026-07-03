@@ -21,12 +21,35 @@ public class StorageConfig {
     private String jsonFile;
 
     @Bean
-    public Storage storage() throws IOException {
-        ClassPathResource resource = new ClassPathResource(jsonPath + File.separator + jsonFile);
+public Storage storage() throws IOException {
+
+    String firebaseCredentials = System.getenv("FIREBASE_CREDENTIALS");
+
+    GoogleCredentials credentials;
+
+    if (firebaseCredentials != null && !firebaseCredentials.isBlank()) {
+
+        try (InputStream inputStream =
+                new java.io.ByteArrayInputStream(firebaseCredentials.getBytes())) {
+
+            credentials = GoogleCredentials.fromStream(inputStream);
+        }
+
+    } else {
+
+        ClassPathResource resource =
+                new ClassPathResource(jsonPath + "/" + jsonFile);
+
         try (InputStream inputStream = resource.getInputStream()) {
-            GoogleCredentials credentials = GoogleCredentials.fromStream(inputStream);
-            return StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+
+            credentials = GoogleCredentials.fromStream(inputStream);
         }
     }
+
+    return StorageOptions.newBuilder()
+            .setCredentials(credentials)
+            .build()
+            .getService();
+}
     
 }
