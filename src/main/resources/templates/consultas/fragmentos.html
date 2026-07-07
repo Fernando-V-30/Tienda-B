@@ -67,8 +67,40 @@
             <div th:replace="~{consultas/fragmentos :: formConsulta('primary',#{consultas.derivadas},'/consultas/consultaDerivada')}"/>
             <div th:replace="~{consultas/fragmentos :: formConsulta('warning',#{consultas.jpql},'/consultas/consultaJPQL')}"/>
             <div th:replace="~{consultas/fragmentos :: formConsulta('success',#{consultas.sql},'/consultas/consultaSQL')}"/>
-            <div th:replace="~{consultas/fragmentos :: formConsulta('warning',#{consultas.productos},'/consultas/consultaProductos')}"/>
             <div class='card'><p>Acá va su Práctica #2</p></div>
+
+    <div class="card-header bg-info text-white text-center">
+        <h5>Buscar por nombre</h5>
+    </div>
+
+    <div class="card-body">
+
+        <form th:action="@{/consultas/busquedaNombre}" method="post">
+
+            <div class="mb-3">
+                <label>Nombre del producto</label>
+
+                <input
+                    type="text"
+                    name="descripcion"
+                    class="form-control"
+                    placeholder="Ej: Monitor"
+                    required>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-info">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    Buscar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+            
         </section>
 
         <div th:fragment='formConsulta(colorForm, textoForm, urlForm)'>

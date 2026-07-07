@@ -60,11 +60,12 @@ public class ConsultaController {
         return "/consultas/listado";
     }
     
-    @PostMapping("/consultas/busquedaNombre")
-    public String buscarNombre(String descripcion, Model model) {
+    @PostMapping("/busquedaNombre")
+    public String buscarNombre(@RequestParam String descripcion,
+                           Model model) {
 
-    List<Producto> lista = productoService.consultaProductos(descripcion);
-        model.addAttribute("productos", lista);
+    var productos = productoService.consultaProductos(descripcion);
+        model.addAttribute("productos", productos);
         model.addAttribute("descripcion", descripcion);
         return "/consultas/listado";
     }

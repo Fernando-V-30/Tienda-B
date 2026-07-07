@@ -14,7 +14,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     public List<Producto> findByActivoTrue();
     public List<Producto> findByDescripcionContainingIgnoreCase(String descripcion);
-    public List<Producto> findByNombreContainingIgnoreCase(String nombre);
     public List<Producto> findByPrecioBetweenOrderByPrecioAsc(double precioInf, double precioSup);
     
     @Query(value = "SELECT p FROM Producto p WHERE p.precio BETWEEN :precioInf AND :precioSup ORDER BY p. precio ASC")
