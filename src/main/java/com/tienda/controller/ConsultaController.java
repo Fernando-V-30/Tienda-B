@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.tienda.domain.Producto;
+import java.util.List;
 
 @Controller
 @RequestMapping("/consultas")
@@ -57,4 +59,14 @@ public class ConsultaController {
         model.addAttribute("precioSup", precioSup);
         return "/consultas/listado";
     }
+    
+    @PostMapping("/consultas/busquedaNombre")
+    public String buscarNombre(String descripcion, Model model) {
+
+    List<Producto> lista = productoService.consultaProductos(descripcion);
+        model.addAttribute("productos", lista);
+        model.addAttribute("descripcion", descripcion);
+        return "/consultas/listado";
+    }
+    
 }

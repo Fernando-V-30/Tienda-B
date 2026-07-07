@@ -10,5 +10,37 @@
         <section th:replace="~{consultas/fragmentos :: tarjetas}"/>
 
         <footer th:replace="~{general/fragmentos :: footer}"/>
+        
+        <div class="col-md-4">
+    <div class="card">
+
+        <div class="card-header bg-primary text-white">
+            Buscar por nombre
+        </div>
+
+        <div class="card-body">
+
+            <form th:action="@{/consultas/busquedaNombre}" method="get">
+
+                <div class="mb-3">
+                    <label>Nombre del producto</label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="descripcion"
+                        placeholder="Ej: Monitor">
+                </div>
+
+                <button class="btn btn-primary">
+                    Buscar
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
     </body>
 </html>
